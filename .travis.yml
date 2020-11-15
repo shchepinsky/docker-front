@@ -14,4 +14,29 @@ script:
   # run tests and make sure test command exists instead of waiting
   - docker run -e CI=true shchepinsky/docker-front npm run test -- --coverage
 
-# language: generic
+deploy:
+  # AWS app deployment system
+  provider: elasticbeanstalk
+  # region from application url
+  region: 'eu-central-1'
+  # application name in 'all applications'
+  app: 'docker-test'
+  # environment created for application above
+  env: 'DockerTest-env'
+  # S3 bucket created automatically for our beanstalk instance
+  bucket_name: 'elasticbeanstalk-eu-central-1-090921815907'
+  # S3 bucket folder that usually matches apps name
+  bucket_path: 'docker-test'
+  # specify event when deploy happens
+  on:
+    # when branch has new code
+    branch: master
+# use AWS S3 IAM credentials from env var
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key:
+  secure: $AWS_SECRET_KEY
+
+
+
+# access_key_id: $AWS_ACCESS_KEY
+# secret_access_key: $AWS_SECRET_KEY

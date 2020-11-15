@@ -1,0 +1,31 @@
+version: '3'
+
+# services are docker containers to be created and started
+services:
+  # front end application
+  shipmen-client:
+    # build '.' - build container from local dir, extended form:
+    build:
+      # project directory
+      context: '.'
+      # name of docker file to use
+      dockerfile: Dockerfile.dev
+    volumes:
+      # preserve node_modules dir from being overwritten by reference below
+      - /usr/shipmen-client/node_modules
+      # reference to local project dir from the app target dir in container
+      - .:/usr/shipmen-client
+    # forward ports from local to container
+    ports:
+      - '3000:3000'
+    # override default container command
+    command: ['npm', 'start']
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/shipmen-client/node_modules
+      - .:/usr/shipmen-client
+    command: [ 'npm', 'test' ]
+

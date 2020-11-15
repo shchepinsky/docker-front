@@ -1,0 +1,14 @@
+# use existing docker image as a base, 'alpine' means bare bones
+FROM node:14.15.0-alpine
+
+# target dir in the container
+WORKDIR /usr/shipmen-client
+
+# prevents 'npm i' stage from running when other sources change
+COPY ./package.json .
+RUN npm i
+
+# copy rest of the content to container
+COPY . .
+
+CMD ['npm', 'start']

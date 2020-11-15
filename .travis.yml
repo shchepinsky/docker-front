@@ -28,16 +28,10 @@ deploy:
   bucket_name: 'elasticbeanstalk-eu-central-1-090921815907'
   # S3 bucket folder that usually matches apps name
   bucket_path: 'docker-test'
+  # use AWS S3 IAM credentials from env var
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
   # specify event when deploy happens
   on:
     # when branch has new code
     branch: master
-# use AWS S3 IAM credentials from env var
-access_key_id: $AWS_ACCESS_KEY
-secret_access_key:
-  secure: $AWS_SECRET_KEY
-
-
-
-# access_key_id: $AWS_ACCESS_KEY
-# secret_access_key: $AWS_SECRET_KEY

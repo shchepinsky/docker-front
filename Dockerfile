@@ -15,5 +15,7 @@ RUN npm run build
 
 
 FROM nginx
+# elastic beanstalk uses this to expose port for incoming traffic
+EXPOSE 80
 # reference previous 'builder' stage
 COPY --from=builder /usr/shipmen-client/build /usr/share/nginx/html

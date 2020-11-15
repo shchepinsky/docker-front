@@ -12,6 +12,8 @@ before_install:
 
 script:
   # run tests and make sure test command exists instead of waiting
-  - docker run -e CI=true shchepinsky/docker-front npm run test -- --coverage
+  # also need to set CI=true env var othewise jest won't exit 
+  - export CI=true
+  - docker run shchepinsky/docker-front npm run test -- --coverage
 
 # language: generic

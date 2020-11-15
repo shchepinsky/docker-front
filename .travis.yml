@@ -1,0 +1,18 @@
+# require super user permissions to execute build
+sudo: required
+
+# required services
+service:
+  - docker
+
+# list of commands before install
+before_install:
+  # build an oimage and tag it
+  - docker build -t shchepinsky/docker-front -f Dockerfile.dev .
+
+script:
+  # run tests and make sure test command exists instead of waiting
+  - docker run shchepinsky/docker-front npm run test -- --coverage
+
+
+# language: generic

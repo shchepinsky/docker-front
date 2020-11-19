@@ -8,7 +8,7 @@ function App () {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
         <p>
-          change 2
+          changed on a feature branch
         </p>
       </header>
     </div>
